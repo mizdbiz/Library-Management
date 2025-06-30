@@ -1,0 +1,26 @@
+{
+  "name": "@library-management/Student-Service-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@library-management/Student-Service"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/Student-Service-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@library-management/Student-Service:build",
+          "@library-management/Student-Service:serve"
+        ]
+      }
+    }
+  }
+}
