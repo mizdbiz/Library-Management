@@ -1,0 +1,26 @@
+{
+  "name": "@library-management/Book-Service-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@library-management/Book-Service"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/Book-Service-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@library-management/Book-Service:build",
+          "@library-management/Book-Service:serve"
+        ]
+      }
+    }
+  }
+}
