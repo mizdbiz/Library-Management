@@ -6,12 +6,13 @@
 import express from 'express';
 import * as path from 'path';
 
+
 const app = express();
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to Student-Service!' });
+  res.send({ message: 'Welcome to Student Service!!!!' });
 });
 
 const port = process.env.PORT || 3333;
