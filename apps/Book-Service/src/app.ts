@@ -1,13 +1,14 @@
 import express, { Application } from 'express';
-import { getBooks, api } from './controllers/book.controller';
+import * as BookController from './controllers/book.controller';
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', api);
-app.get('/books', getBooks);
+app.get('/', BookController.api);
 
+app.get('/books', BookController.getBooks);
+/*app.post('/books', BookController.createBook);*/
 
 export default app;
