@@ -1,15 +1,8 @@
-// src/services/book.service.ts
-import { BookRepository } from '../repositories/book.repository';
 import { Book } from '../entities/book.entity';
 
-export class BookService {
-  private bookRepository: BookRepository;
-
-  constructor() {
-    this.bookRepository = new BookRepository();
-  }
-
-  getBooks(): Book[] {
-    return this.bookRepository.getAllBooks();
-  }
-}
+export const getAllBooks = (): Book[] => {
+  return [
+    { id: 1, title: "1984", author: "George Orwell" },
+    { id: 2, title: "Brave New World", author: "Aldous Huxley" }
+  ];
+};

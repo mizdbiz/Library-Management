@@ -1,10 +1,12 @@
-// src/controllers/book.controller.ts
 import { Request, Response } from 'express';
-import { BookService } from '../services/book.service';
+import { getAllBooks } from '../services/book.service';
+import { Book } from '../entities/book.entity';
 
-const bookService = new BookService();
+export const api = (req: Request, res: Response) => {
+  res.send('API is running');
+};
 
-export const getBooks = (req: Request, res: Response) => {
-  const books = bookService.getBooks();
-  res.json(books);
+export const getBooks = (req: Request, res: Response): void => {
+  const books: Book[] = getAllBooks();
+  res.status(200).json(books);
 };
