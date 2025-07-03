@@ -1,6 +1,13 @@
-// src/entities/book.entity.ts
-export interface Book {
-  id: number;
-  title: string;
-  author: string;
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
+export class Book {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column()
+  title!: string;
+
+  @Column()
+  author!: string;
 }
