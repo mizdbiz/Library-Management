@@ -17,7 +17,7 @@
     "strict": true,
     "target": "es2022",
     "customConditions": ["development"],
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+    "emitDecoratorMetadata": true
   }
 }
