@@ -5,11 +5,9 @@ const PORT = process.env.PORT || 3000;
 
 AppDataSource.initialize()
   .then(() => {
-    console.log('📦 MySQL Data Source has been initialized!');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server is listening on http://localhost:${PORT}`);
-    });
+    console.log('📦 Data Source initialized');
+    app.listen(PORT, () =>
+      console.log(`🚀 Server running at http://localhost:${PORT}`)
+    );
   })
-  .catch((err) => {
-    console.error('❌ Error during MySQL Data Source initialization', err);
-  });
+  .catch(err => console.error('❌ Data Source init error:', err));
