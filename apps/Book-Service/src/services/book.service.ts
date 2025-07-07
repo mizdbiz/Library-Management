@@ -1,29 +1,15 @@
-import { Book } from '../entities/book.entity';
 import { BookRepository } from '../repositories/book.repository';
 
-export const getAllBooks = async (): Promise<Book[]> => {
-  return await BookRepository.find();
-};
+export const getAllBooks = () => BookRepository.find();
 
-export const getBookById = async (id: number): Promise<Book | null> => {
-  return await BookRepository.findOneBy({ id });
-};
+export const getBookById = (id: number) => BookRepository.findOneBy({ id });
 
-/*export const createBook = async (data: Partial<Book>): Promise<Book> => {
-  const book = BookRepository.create(data);
-  return await BookRepository.save(book);
-};
 
-export const updateBook = async (id: number, data: Partial<Book>): Promise<Book | null> => {
-  const book = await BookRepository.findOneBy({ id });
-  if (!book) return null;
+export const createBook = (data: { title: string; author: string; pages?: number }) =>
+  BookRepository.save(BookRepository.create(data));
 
-  BookRepository.merge(book, data);
-  return await BookRepository.save(book);
-};
+export const updateBook = async (id: number, data: { title?: string; author?: string; pages?: number }) =>
+  (await BookRepository.update(id, data),  getBookById(id));
 
-export const deleteBook = async (id: number): Promise<boolean> => {
-  const result = await BookRepository.delete(id);
-  return result.affected !== 0;
-};
-*/
+export const deleteBook = async (id: number) =>
+  (await BookRepository.delete(id), { message: 'Book deleted' });

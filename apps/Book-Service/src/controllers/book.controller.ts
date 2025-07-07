@@ -1,18 +1,28 @@
 import { Request, Response } from 'express';
-import * as BookService from '../services/book.service';
+import {getAllBooks,createBook,updateBook,deleteBook,} from '../services/book.service';
 
 export const api = (req: Request, res: Response) => {
   res.send('API is running');
 };
 
-export const getBooks = async (req: Request, res: Response): Promise<void> => {
-  const books = await BookService.getAllBooks();
-  res.status(200).json(books);
+export const getBooks = async (req: Request, res: Response) => {
+  res.json(await getAllBooks());
 };
 
-/*export const createBook = async (req: Request, res: Response): Promise<void> => {
-  const { title, author } = req.body;
-  const book = await BookService.createBook({ title, author });
+export const createBookController = async (req: Request, res: Response) => {
+  const book = await createBook(req.body);
   res.status(201).json(book);
-};*/
+};
+
+export const updateBookController = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const updated = await updateBook(id, req.body);
+  res.json(updated);
+};
+
+export const deleteBookController = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const result = await deleteBook(id);
+  res.json(result);
+};
 
