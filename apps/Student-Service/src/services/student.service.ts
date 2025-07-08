@@ -1,7 +1,7 @@
 import { StudentRepository } from "../repositories/student.repository";
 import { Student } from "../entities/student.entity";
 
-export class  Studentservice {
+export class  StudentService {
     constructor(private studentrepo : StudentRepository){}
 
     getAllStudents = () => this.studentrepo.find();
