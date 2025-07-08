@@ -1,15 +1,16 @@
+import { Book } from '../entities/book.entity';
 import { BookRepository } from '../repositories/book.repository';
 
-export const getAllBooks = () => BookRepository.find();
+export class BookService {
+  constructor(private bookRepo: BookRepository) {}
+  
+  getAllBooks = () => this.bookRepo.findAll();
 
-export const getBookById = (id: number) => BookRepository.findOneBy({ id });
+  getBookById = (id: number) => this.bookRepo.findById(id);
 
+  createBook = (data: Partial<Book>) => this.bookRepo.create(data);
 
-export const createBook = (data: { title: string; author: string; pages?: number }) =>
-  BookRepository.save(BookRepository.create(data));
+  updateBook = (id: number, data: Partial<Book>) => this.bookRepo.update(id, data);
 
-export const updateBook = async (id: number, data: { title?: string; author?: string; pages?: number }) =>
-  (await BookRepository.update(id, data),  getBookById(id));
-
-export const deleteBook = async (id: number) =>
-  (await BookRepository.delete(id), { message: 'Book deleted' });
+  deleteBook = (id: number) => this.bookRepo.delete(id);
+}
