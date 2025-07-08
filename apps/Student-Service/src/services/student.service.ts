@@ -1,15 +1,23 @@
-import { studentRepository } from "../repositories/student.repository";
+import { StudentRepository } from "../repositories/student.repository";
+import { Student } from "../entities/student.entity";
 
-export const getAllStudents = () => studentRepository.find();
+export class  Studentservice {
+    constructor(private studentrepo : StudentRepository){}
 
-export const getStudentById = (id: number) => studentRepository.findOneBy({ id });
+    getAllStudents = () => this.studentrepo.find();
 
-export const createstudent = (data: {name: string, email: string }) =>
-    studentRepository.save(studentRepository.create(data));
+    findOneBy = (id: number) => this.studentrepo.findById(id);
 
-export const updatestudent = async (id: number,data:{ name: string, email: string}) =>
-    (await studentRepository.update(id,data), getStudentById(id));
+    createstudent = (data: Partial<Student>) => this.studentrepo.create(data);
 
-export const deleteStudent = async (id: number) =>
-    (await studentRepository.delete(id), {message: 'Student deleted'});
+    updatestudent = (id: number, data: Partial<Student>) => this.studentrepo.update(id, data);
+
+    deletestudent = (id: number) => this.studentrepo.delete(id);
+
+    save = (student: Student) => this.studentrepo.save(student);
+
+}
+
+
+
 
