@@ -1,6 +1,6 @@
 import { AppDataSource } from '../databases/data-source';
 import { Book } from '../entities/book.entity';
-import { BookRepo } from '../interface/book.interface';
+import { BookRepo } from '../interfaces/book.interface';
 
 export class BookRepository implements BookRepo {
   private repo = AppDataSource.getRepository(Book);
