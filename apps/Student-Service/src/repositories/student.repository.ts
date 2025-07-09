@@ -1,7 +1,8 @@
 import { AppDataSource } from  '../database/data-source';
 import { Student } from '../entities/student.entity';
+import { StudentRepositoryInterface } from './studentinterface';
 
-export class StudentRepository {
+export class StudentRepository implements StudentRepositoryInterface {
     private repo = AppDataSource.getRepository(Student);
 
     find = () => this.repo.find();
