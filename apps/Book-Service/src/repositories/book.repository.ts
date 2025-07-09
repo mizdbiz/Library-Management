@@ -1,17 +1,30 @@
 import { AppDataSource } from '../databases/data-source';
 import { Book } from '../entities/book.entity';
+import { BookRepo } from '../interface/book.interface';
 
-export class BookRepository {
-    private repo = AppDataSource.getRepository(Book);
+export class BookRepository implements BookRepo {
+  private repo = AppDataSource.getRepository(Book);
 
-    findAll = () => this.repo.find();
+  findAll(): Promise<Book[]> {
+    return this.repo.find();
+  }
 
-    findById= (id: number) => this.repo.findOneBy({ id });
+  findById(id: number): Promise<Book | null> {
+    return this.repo.findOneBy({ id });
+  }
 
-    create= (data: Partial<Book>)=> this.repo.save(this.repo.create(data));
+  create(data: Partial<Book>): Promise<Book> {
+    const book = this.repo.create(data);
+    return this.repo.save(book);
+  }
 
-    update = async (id: number, data: Partial<Book>) =>this.repo.update(id, data).then(() => this.findById(id));
+  async update(id: number, data: Partial<Book>): Promise<Book | null> {
+    await this.repo.update(id, data);
+    return this.findById(id);
+  }
 
-    delete = async (id: number) =>this.repo.delete(id).then(() => ({ message: 'Book deleted' }));
-
+  async delete(id: number): Promise<{ message: string }> {
+    await this.repo.delete(id);
+    return { message: 'Book deleted' };
+  }
 }
